@@ -1,0 +1,23 @@
+---
+title: Evidence.dev como alternativa de BI
+description: Evidence.dev como alternativa de BI
+pubDate: 2024-05-31T14:00:00.000Z
+updatedDate: 2025-01-02T14:00:00.000Z
+heroImage: /1753651719503.png
+---
+
+Dashboards de BI estilo Tableau ou Power BI são reconhecidamente caros e oferecem poucas alternativas no mercado com boa relação custo-benefício. O Amazon QuickSight é uma opção que já utilizei por ter um custo mais confortável comparado aos demais, mas nunca fui muito fã do serviço.
+
+Durante minha experiência com QuickSight, identifiquei alguns pontos críticos. A configuração para administradores e autores não é intuitiva, e bugs ocorrem sem motivo aparente. O visual dos dashboards, por mais que permita customização, não é "aesthetic" para mim e passa a sensação de gráficos "pesados". Isso pode estar relacionado ao carregamento lento dos dashboards, mesmo com o cache interno do QuickSight para armazenar dados das fontes de consulta.
+
+Mesmo com esses pontos negativos, já utilizei o QuickSight justamente por considerá-lo o mais próximo dos serviços mais caros de BI, mas com um preço bem acessível quando há poucos usuários consumindo o dashboard. Contudo, sempre senti falta de uma solução que fosse simples o suficiente para construir dashboards focados no visual, com construção simplificada para desenvolvedores e que não tivesse custos associados por usuário ou acesso aos dashboards como as ferramentas comentadas.
+
+Recentemente descobri o Evidence.dev, um framework open-source que se define como "Business Intelligence as Code". O que mais me chamou atenção foram exatamente os dois pontos que considerava problemáticos no QuickSight: o visual, que no Evidence.dev é mais "clean" e "leve", e a construção, que é baseada na união de Markdown com SQL, duas linguagens amplamente difundidas e, por isso, simples de usar.
+
+Para validar o framework, resolvi colocar em prática e migrar um dashboard sobre resultados de reviews de Well-Architected da AWS que havia construído anteriormente no QuickSight para o Evidence.dev. O objetivo era confirmar se ele poderia ser um substituto real do dashboard existente. O resultado final ficou bem próximo do dashboard original, e o fato dele aceitar Markdown ainda permite incorporar insights escritos e customizados junto com os gráficos (algo que eu poderia fazer também com o QuickSight) mas que no Evidence.dev é mais simplificado devido ao layout ser mais próximo de um site com largura fixa e comprimento contínuo, diferente de um dashboard de tamanho e comprimento fixos. Isso permite transformar facilmente o dashboard em um relatório exportável em PDF.
+
+![](/1753654517118.png)![](/1753654574510.png)![](/1753654625783.png)![](/1753654663917.png)
+
+O dashboard construído está disponível em https\://evidence.camarim.cloud/ e, caso tenham interesse, posso fazer um novo artigo explicando mais detalhadamente o funcionamento do framework e como está sendo feita a consulta dos dados do Well-Architected.
+
+O Evidence.dev representa uma alternativa viável e moderna para quem busca soluções de BI mais flexíveis, econômicas e developer-friendly. Para organizações que valorizam controle sobre custos e personalização avançada, vale a pena considerar esta opção open-source em suas avaliações de ferramentas de BI.

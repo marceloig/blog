@@ -1,0 +1,59 @@
+---
+title: Aplicando conceitos do C4 Model no desenho de arquiteturas de soluções AWS
+description: Aplicando conceitos do C4 Model no desenho de arquiteturas de soluções AWS
+pubDate: 2025-06-30T03:00:00.000Z
+heroImage: /c4-overview.png
+---
+
+Ao longo dos anos atuando como arquiteto de soluções em diversos projetos e clientes, enfrentei um desafio recorrente: como documentar de forma clara e eficazes arquiteturas em ambientes AWS, equilibrando simplicidade visual com detalhes técnicos suficientes para implementação.
+
+O cenário AWS apresenta uma complexidade particular, pois mescla elementos de arquitetura de software com componentes tradicionalmente associados a hardware. Na nuvem da Amazon, lidamos simultaneamente com serviços que executam software e serviços que são consumidos via APIs por nossas aplicações.
+
+Embora eu tenha desenvolvido convenções próprias baseadas na experiência de criar dezenas de diagramas arquiteturais, sempre senti falta de um modelo padronizado que pudesse guiar não apenas meu trabalho, mas também o de colegas. A virada aconteceu em meu último projeto, quando precisei desenhar uma arquitetura de software que interagiria com serviços AWS para um desenvolvimento do zero. Foi então que apliquei o C4 Model e percebi seu potencial para nortear também desenhos de soluções na AWS.
+
+## O que é o C4 Model?
+
+Para quem não está familiarizado, o C4 Model foi criado por Simon Brown como uma alternativa mais acessível ao UML e outros métodos complexos para representação arquitetural. O nome "C4" refere-se aos quatro níveis hierárquicos de representação, cada um destinado a uma específica parte do sistema:
+
+* Context: oferece um ponto de partida, mostrando como o sistema se insere no ambiente e ecossistema mais amplo.
+* Container: aproxima o foco no sistema específico, detalhando aplicações e repositórios de dados que o compõem.
+* Component: aumenta o detalhamento de um "container" individual, revelando seus componentes internos.
+* Code: permite o foco em componentes específicos, demonstrando sua implementação a nível de código.
+
+![Exemplo de uma arquitetura em C4 Model](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rn4fnonrdvola7yzixw2.png)
+
+Recomendo visitar o site c4model.com para uma compreensão mais profunda desta metodologia, já que utilizarei suas convenções e nomenclaturas ao longo deste artigo.
+
+Vamos agora explorar como o C4 Model pode ser adaptado para o contexto AWS, começando pelo primeiro nível o **diagrama de contexto** que estabelece a visão geral do sistema, seus usuários e suas integrações com outros sistemas.
+
+![Diagrama de Contexto](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5dru6e653pfkneqa188n.png)
+
+Em uma arquitetura de solução AWS o contexto nesse caso seriam os serviços AWS, e sua interação entre si, nesse nível não estamos preocupados com quais recursos desse serviços estão sendo utilizados, mas sim os serviços que compõem a solução a ser entregue para o cliente
+
+![Diagrama de Contexto AWS](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ktgrezd5j3mp272jf2eo.png)
+
+Indo para o segundo nível, o **diagrama de container**, amplia o sistema de software e mostra os containers (aplicativos, armazenamentos de dados, microservices, etc.) que compõem esse sistema de software
+
+![Diagrama de Container](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t55322qnem7t462ot8ki.png)
+
+O equivalente em uma arquitetura de solução AWS seria a representação dos recursos a serem utilizados do serviços AWS definidos no primeiro nível. Como pode haver particularidades na escolha do serviço AWS, a representação utilizando o recurso deixa mais claro qual tipo de Elastic Load Balancing vai ser utilizado por exemplo
+
+![Diagrama de Container AWS](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jxe5jrz58h3xkfim5f0d.png)
+
+Os demais níveis não teria uma representação equivalente em uma arquitetura AWS porque entraria mais a fundo no que esta sendo executado nos serviços e recursos na arquitetura AWS definida
+
+Em resumo podemos seguir a seguinte estrutura
+
+### Nível 1 - Context (Contexto AWS)
+
+* **Foco:** Serviços AWS principais da solução
+* **Objetivo:** Visão geral sem detalhes de recursos específicos
+* **Exemplo:** ELB, RDS, EC2, Lambda
+
+### Nível 2 - Container (Recursos AWS)
+
+* **Foco:** Recursos específicos dentro de cada serviço AWS
+* **Objetivo:** Detalhar configurações e tipos de recursos
+* **Exemplo:** ELB ALB/ELB NLB, RDS MySQL/RDS PostgreSQL, EC2 t3.medium/EC2 c5.large, Lambda Function NodeJS/Lambda Function Python
+
+Desenho de arquitetura é sempre um desafio porque precisamos demonstrar a arquitetura atual de uma forma que seja simples de entender mas que tenha as informações necessárias para entendimento de qualquer pessoa técnica e não-técnica que vai interagir com a arquitetura implementada, seguir esse modelo ajuda a dar uma logica de representação que vai nortear os diferente niveis de equipes e pessoas de como interpretar a arquitetura em níveis adequados ao seu contexto, lideres técnicos e executivos no nível 1, desenvolvedores e times técnicos no nível 2.
